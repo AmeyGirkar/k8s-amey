@@ -175,3 +175,7 @@ ingress-nginx-admission-create-dhdll       0/1     Completed   0          15m   
 ingress-nginx-admission-patch-j52j2        0/1     Completed   0          15m   192.168.1.5   node01   <none>           <none>
 ingress-nginx-controller-974f4cbd8-4wh92   1/1     Running     0          15m   192.168.1.6   node01   <none>           <none>
 ```
+![image](https://github.com/user-attachments/assets/46f89465-b7b9-481d-acd1-d3f28ae9f95b)
+![image](https://github.com/user-attachments/assets/ca195c14-23ad-45fa-84e8-755968598e75)
+
+
