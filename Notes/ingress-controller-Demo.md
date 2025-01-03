@@ -109,8 +109,37 @@ NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
 httpd        ClusterIP   10.110.187.115   <none>        80/TCP    28s
 kubernetes   ClusterIP   10.96.0.1        <none>        443/TCP   20h
 ```
+### Step 6: Configure Ingress Rule for Traffic Routing
+Create an ingress rule (save as `httpd-ingress.yaml`):
 
-### Step 6: Check Services in Ingress-NGINX Namespace
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: httpd-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: httpd
+            port:
+              number: 80
+```
+
+Apply the ingress rule:
+```bash
+kubectl apply -f httpd-ingress.yaml
+```
+
+
+### Step 7: Check Services in Ingress-NGINX Namespace
 ```bash
 kubectl get svc -n ingress-nginx
 ```
@@ -121,7 +150,7 @@ ingress-nginx-controller             LoadBalancer   10.98.34.127   <pending>    
 ingress-nginx-controller-admission   ClusterIP      10.96.70.193   <none>        443/TCP                      5m49s
 ```
 
-### Step 7: Test the Setup with Curl (Round Robin)
+### Step 8: Test the Setup with Curl (Round Robin)
 ```bash
 curl localhost:30224
 ```
@@ -139,7 +168,7 @@ Welcome to Version 1
 Welcome to Version 2
 ```
 
-### Converting LoadBalancer to NodePort
+### Step 9 :Converting LoadBalancer to NodePort
 
 After editing the service:
 ```bash
