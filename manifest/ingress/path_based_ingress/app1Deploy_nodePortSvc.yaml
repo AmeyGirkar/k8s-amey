@@ -26,6 +26,7 @@ metadata:
   name: app1-nginx-nodeport-service
   labels:
     app: app1-nginx
+  annotations:
 spec:
   type: NodePort
   selector:
